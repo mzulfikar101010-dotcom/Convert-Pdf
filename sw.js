@@ -1,5 +1,5 @@
 // Service worker: simpan aplikasi dan library agar bisa dibuka tanpa internet setelah pemakaian pertama.
-const CACHE = 'rapikan-resi-v1';
+const CACHE = 'rapikan-resi-v2';
 const SHELL = ['./', 'index.html', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png'];
 
 self.addEventListener('install', e => {

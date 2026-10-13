@@ -11,6 +11,10 @@ Aplikasi untuk menggabung PDF resi TikTok, mengelompokkan per produk, menambah h
 ## Install di PC
 Buka alamat di Chrome atau Edge, lalu klik ikon **Install** di ujung kanan address bar (atau menu titik tiga > **Cast, save, and share > Install page as app** di Chrome / **Apps > Install this site as an app** di Edge). Aplikasi muncul di Start Menu dan desktop seperti program biasa.
 
+## Fitur
+- Resi dikelompokkan per produk (A-Z), Express dulu baru Cargo. Di tiap jenis, resi Qty lebih dari 1 ditaruh di urutan terakhir, dilingkari, dan diberi kotak "Qty : N".
+- Gambar "Jangan lupa video unboxing" sudah tertanam di aplikasi dan otomatis dipasang di bawah semua resi bersama nama packer.
+
 ## Catatan
 - Buka sekali dengan internet. Setelah itu library dan font tersimpan, jadi bisa dipakai offline.
 - Kalau mengganti file di GitHub dan tampilan belum berubah, ubah `CACHE = 'rapikan-resi-v1'` di `sw.js` menjadi `v2` (dan seterusnya) agar versi baru terambil.
