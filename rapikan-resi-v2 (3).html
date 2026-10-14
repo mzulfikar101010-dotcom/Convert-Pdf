@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Rapikan Resi</title>
+<meta name="theme-color" content="#0d6b5b">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Figtree:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#e8edf1;--card:#fff;--ink:#121a22;--mute:#5d6b78;--line:#cdd6dd;--acc:#0d6b5b;--acc-ink:#fff;--tape:#ffd23f;--warn:#a4400f;--danger:#d63a3a;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f161c;--card:#18222b;--ink:#eaf0f4;--mute:#97a6b3;--line:#2c3a46;--acc:#38c2a8;--acc-ink:#04201a;--warn:#ffa26b;--danger:#ff7b7b}}
+:root[data-theme="dark"]{--bg:#0f161c;--card:#18222b;--ink:#eaf0f4;--mute:#97a6b3;--line:#2c3a46;--acc:#38c2a8;--acc-ink:#04201a;--warn:#ffa26b;--danger:#ff7b7b}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 15px/1.5 Figtree,system-ui,sans-serif}
+main{max-width:860px;margin:0 auto;padding:28px 16px 64px}
+h1{font:800 34px/1.1 'Bricolage Grotesque',Figtree,sans-serif;margin:0 0 6px;letter-spacing:-.01em}
+h2{font:600 19px/1.2 'Bricolage Grotesque',Figtree,sans-serif;margin:0 0 12px}
+.sub{color:var(--mute);margin:0 0 24px}
+section{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:16px}
+.drop{border:2px dashed var(--line);border-radius:10px;padding:26px 14px;text-align:center;color:var(--mute);cursor:pointer;transition:.15s}
+.drop.on,.drop:hover,.drop:focus-visible{border-color:var(--acc);background:color-mix(in srgb,var(--acc) 8%,transparent);outline:none}
+.drop b{color:var(--ink)}
+ul{list-style:none;margin:12px 0 0;padding:0}
+li.f{display:flex;gap:10px;align-items:center;padding:8px 0;border-top:1px solid var(--line)}
+li.f span.n{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+li.f small{color:var(--mute)}
+button{font:700 14px Figtree,sans-serif;border-radius:8px;border:1px solid var(--line);background:transparent;color:var(--ink);padding:9px 16px;cursor:pointer}
+button:focus-visible,input:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+button.p{background:var(--acc);color:var(--acc-ink);border-color:var(--acc);font-size:16px;padding:13px 26px}
+button.x{padding:3px 9px;border-radius:6px;color:var(--mute)}
+button:disabled{opacity:.5;cursor:not-allowed}
+label{display:block;font-weight:700;margin-bottom:6px}
+input[type=text]{width:100%;max-width:340px;font:500 16px Figtree,sans-serif;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink)}
+.thumb{width:84px;height:84px;border:2px dashed var(--line);border-radius:8px;display:grid;place-items:center;text-align:center;font-size:12px;color:var(--mute);cursor:pointer;overflow:hidden;background:var(--bg);flex:none}
+.thumb.on,.thumb:hover{border-color:var(--acc)}
+.thumb img{width:100%;height:100%;object-fit:cover}
+.fthumb{width:260px;height:56px}
+.fthumb img{object-fit:contain;background:#fff}
+.frow{display:flex;gap:12px;align-items:center;margin-top:16px;flex-wrap:wrap}
+.prod{display:flex;gap:14px;align-items:center;padding:12px 0;border-top:1px solid var(--line)}
+.prod:first-of-type{border-top:0}
+.prod .t{flex:1;min-width:0}
+button.rm{width:46px;height:46px;padding:0;flex:none;display:grid;place-items:center;border:2px solid var(--danger);color:var(--danger);border-radius:8px;background:transparent}
+button.rm:hover{background:var(--danger);color:#fff}
+button.rm svg{width:22px;height:22px}
+#rb{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.prod .t b{display:block;text-transform:uppercase;overflow-wrap:anywhere}
+.prod .t span{color:var(--mute);font-size:13px}
+.tag{display:inline-block;background:var(--tape);color:#121a22;font-weight:700;font-size:12px;padding:1px 8px;border-radius:4px;margin-right:6px}
+.msg{margin:12px 0 0;color:var(--mute)}.msg.w{color:var(--warn)}
+.chk{display:flex;gap:8px;align-items:center;margin-top:14px;font-weight:500}.chk input{width:18px;height:18px}
+.bar{height:8px;background:var(--line);border-radius:4px;overflow:hidden;margin-top:12px}.bar i{display:block;height:100%;width:0;background:var(--acc);transition:width .1s}
+.acts{display:flex;gap:12px;flex-wrap:wrap;margin-top:6px}
+[hidden]{display:none!important}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+</head>
+<body>
+<main>
+<h1>Rapikan Resi</h1>
+<p class="sub">Gabung PDF resi TikTok, kelompokkan per produk, tambah halaman keterangan dan nama packer. Semua diproses di perangkatmu, tidak ada yang diunggah ke server.</p>
+
+<section>
+<h2>1. Upload PDF resi</h2>
+<div class="drop" id="dz" tabindex="0" role="button"><b>Tarik file PDF ke sini</b> atau klik untuk memilih<br><small>Bisa berkali-kali, file baru ditambahkan, bukan menggantikan.</small></div>
+<input type="file" id="fi" accept="application/pdf" multiple hidden>
+<ul id="fl"></ul>
+<p class="msg" id="pm" hidden></p>
+</section>
+
+<div id="setup" hidden>
+<section>
+<h2>2. Nama packer</h2>
+<label for="pk">Nama packer</label><input type="text" id="pk" placeholder="Contoh: Nita" autocomplete="off">
+<div class="frow">
+ <div class="thumb fthumb" id="ft" tabindex="0" role="button" aria-label="Gambar footer">Gambar footer (opsional)</div>
+ <button class="x" id="fd" hidden>Hapus</button>
+ <input type="file" id="ffi" accept="image/*" hidden>
+</div>
+<p class="msg">Nama packer dicetak di bawah setiap resi bersama gambar footer (misalnya &quot;Jangan lupa video unboxing&quot;). Gambar footer cukup diupload sekali, tersimpan di browser ini. Resi dengan Qty lebih dari 1 otomatis dilingkari dan diberi kotak &quot;Qty : N&quot;.</p>
+</section>
+
+<section>
+<h2>3. Gambar produk untuk halaman keterangan</h2>
+<div id="pl"></div>
+<div class="msg" id="rb" hidden><span id="rt"></span><button class="x" id="ru" type="button">Kembalikan semua</button></div>
+<input type="file" id="pfi" accept="image/*" hidden>
+<label class="chk" id="dd" hidden><input type="checkbox" id="dc"><span id="dt"></span></label>
+</section>
+
+<section>
+<h2>4. Convert</h2>
+<div class="acts"><button class="p" id="go">Convert</button><a id="dl" hidden><button class="p" type="button">Download PDF</button></a><button id="rs" hidden>Reset</button></div>
+<div class="bar" id="bar" hidden><i></i></div>
+<p class="msg" id="st" aria-live="polite"></p>
+</section>
+</div>
+</main>
+
+<script>
+pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+const $=s=>document.querySelector(s),norm=s=>s.replace(/\s+/g,' ').trim();
+const S={files:[],img:{},foot:{bytes:null,w:1000,h:200,url:null},uid:0,busy:false,url:null,drop:new Set()};
+const OK=/[^\x20-\x7E\u00A0-\u00FF]/g;
+const coll=new Intl.Collator('id',{numeric:true,sensitivity:'base'});
+
+/* ---- Baca teks resi. Potongan teks yang berdekatan digabung dulu supaya tahan beda versi pdf.js ---- */
+function lineItems(items){
+ const raw=items.filter(x=>x.str&&x.str.trim()).map(x=>({s:x.str,x:x.transform[4],y:x.transform[5],w:x.width||0,h:Math.abs(x.height||x.transform[3])||8}));
+ raw.sort((a,b)=>b.y-a.y);
+ const lines=[];
+ for(const r of raw){const L=lines.find(l=>Math.abs(l.y-r.y)<2.5);L?L.t.push(r):lines.push({y:r.y,t:[r]});}
+ const out=[];
+ for(const L of lines){
+  L.t.sort((a,b)=>a.x-b.x);let c=null;
+  for(const r of L.t){
+   const gap=c?r.x-(c.x+c.w):0;
+   if(c&&gap<c.h*0.7){
+    const sp=/\s$/.test(c.s)||/^\s/.test(r.s)||gap<c.h*0.12?'':' ';
+    c.s+=sp+r.s;c.w=r.x+r.w-c.x;
+   }else{if(c)out.push(c);c={...r};}
+  }
+  if(c)out.push(c);
+ }
+ return out;
+}
+function info(items){
+ const it=lineItems(items);
+ const all=it.map(i=>i.s).join(' ');
+ const type=/TT\s*Order\s*ID|Print\s*Time/i.test(all)?'cargo':'express';
+ const oid=(all.match(/\d{16,}/)||[''])[0];
+ const hd=it.find(i=>/^Product\s*Name$/i.test(i.s.trim())),sku=it.find(i=>/^SKU$/i.test(i.s.trim())),qh=it.find(i=>/^Qty$/i.test(i.s.trim())),qt=it.find(i=>/Qty\s*Total/i.test(i.s));
+ if(!hd){console.warn('Product Name tidak ketemu. Teks terbaca:',it.map(i=>i.s));return{name:null,qty:1,type,oid,mark:[]};}
+ const rows=it.filter(i=>i.y<hd.y-2&&(!qt||i.y>qt.y+2));
+ const nm=rows.filter(i=>!sku||i.x<sku.x-3).sort((a,b)=>b.y-a.y||a.x-b.x).map(i=>i.s).join(' ');
+ const qi=rows.filter(i=>qh&&i.x>qh.x-25&&/^\d+$/.test(i.s.trim())),qs=qi.map(i=>+i.s);
+ const mark=qi.filter(i=>+i.s>1).map(i=>({vx:i.x,vy:i.y,vw:i.w,vh:i.h,hx:qh.x,hy:qh.y,hw:qh.w}));
+ return{name:norm(nm)||null,qty:qs.reduce((a,b)=>a+b,0)||1,type,oid,mark};
+}
+async function parseFile(f){
+ const bytes=new Uint8Array(await f.arrayBuffer());
+ const doc=await pdfjsLib.getDocument({data:bytes.slice()}).promise,pages=[];
+ for(let i=1;i<=doc.numPages;i++){const p=await doc.getPage(i);pages.push(info((await p.getTextContent()).items));}
+ doc.destroy();return{id:++S.uid,name:f.name,bytes,pages};
+}
+async function addFiles(list){
+ const fs=[...list].filter(f=>/pdf$/i.test(f.type)||/\.pdf$/i.test(f.name));
+ if(!fs.length)return;
+ S.busy=true;
+ for(const [i,f] of fs.entries()){
+  msg('#pm',`Membaca ${f.name} (${i+1}/${fs.length})...`);
+  try{S.files.push(await parseFile(f));}catch(e){console.error(e);msg('#pm',`Gagal membaca ${f.name}: file bukan PDF yang valid.`,1);}
+  await new Promise(r=>setTimeout(r));
+ }
+ S.busy=false;resetOut();render();
+}
+function msg(sel,t,w){const e=$(sel);e.hidden=!t;e.textContent=t||'';e.classList.toggle('w',!!w);}
+
+function groups(){
+ const seen=new Set(),map=new Map();let dup=0,miss=0;
+ S.files.forEach((f,fi)=>f.pages.forEach((p,pi)=>{
+  const key=(p.name||'(produk tidak terbaca)').toLowerCase();
+  if(S.drop.has(key))return;
+  if(p.oid&&seen.has(p.oid)){dup++;if($('#dc').checked)return;}
+  seen.add(p.oid);if(!p.name)miss++;
+  if(!map.has(key))map.set(key,{key,name:(p.name||'(produk tidak terbaca)'),items:[]});
+  map.get(key).items.push({fi,pi,type:p.type,qty:p.qty,mark:p.mark});
+ }));
+ const gs=[...map.values()].sort((a,b)=>coll.compare(a.key,b.key));
+ gs.forEach(g=>{const r=(t,m)=>g.items.filter(i=>i.type===t&&(i.qty>1)===m);
+  g.items=[...r('express',false),...r('express',true),...r('cargo',false),...r('cargo',true)];
+  g.ex=g.items.filter(i=>i.type==='express').length;g.cg=g.items.length-g.ex;g.mq=g.items.filter(i=>i.qty>1).length;g.qty=g.items.reduce((a,i)=>a+i.qty,0);});
+ return{gs,dup,miss};
+}
+function render(){
+ const has=S.files.length>0;
+ $('#setup').hidden=!has;
+ $('#fl').innerHTML=S.files.map(f=>`<li class="f"><span class="n">${esc(f.name)}</span><small>${f.pages.length} resi</small><button class="x" data-rm="${f.id}" aria-label="Hapus ${esc(f.name)}">Hapus</button></li>`).join('');
+ const{gs,dup,miss}=groups();
+ if(!S.busy)msg('#pm',has?`${S.files.length} file, ${gs.reduce((a,g)=>a+g.items.length,0)} resi siap diproses.`:'');
+ $('#pl').innerHTML=gs.map((g,i)=>{const im=S.img[g.key];return`<div class="prod"><div class="thumb" tabindex="0" role="button" data-pi="${i}" aria-label="Gambar untuk ${esc(g.name)}">${im?`<img src="${im.url}" alt="">`:'Tarik atau klik gambar'}</div>
+ <div class="t"><b>${esc(g.name)}</b><span><span class="tag">${g.items.length} resi</span>${g.qty} paket &middot; Express ${g.ex}, Cargo ${g.cg}${g.mq?` &middot; Qty lebih dari 1: ${g.mq} resi (di urutan akhir)`:''}</span></div>${im?`<button class="x" data-pd="${i}">Hapus gambar</button>`:''}<button class="rm" type="button" data-pg="${i}" title="Hapus kelompok ini dari cetakan" aria-label="Hapus kelompok ${esc(g.name)}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg></button></div>`}).join('');
+ S.gs=gs;
+ $('#rb').hidden=!S.drop.size;$('#rt').textContent=`${S.drop.size} kelompok produk dihapus dari cetakan.`;
+ const d=$('#dd');d.hidden=!(dup||false);$('#dt').textContent=`${dup} resi dobel terdeteksi (Order ID sama). Buang yang dobel.`;
+ if(miss)msg('#st',`${miss} resi nama produknya tidak terbaca, dikelompokkan terpisah.`,1);
+}
+const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+async function shrink(file,max,png){
+ const u=URL.createObjectURL(file);
+ const im=await new Promise((ok,no)=>{const i=new Image();i.onload=()=>ok(i);i.onerror=no;i.src=u;});
+ const k=Math.min(1,max/Math.max(im.width,im.height)),c=document.createElement('canvas');
+ c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);
+ const x=c.getContext('2d');if(!png){x.fillStyle='#fff';x.fillRect(0,0,c.width,c.height);}
+ x.drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(u);
+ const blob=await new Promise(r=>c.toBlob(r,png?'image/png':'image/jpeg',.9));
+ return{bytes:new Uint8Array(await blob.arrayBuffer()),url:URL.createObjectURL(blob),png:!!png,w:c.width,h:c.height};
+}
+function wire(el,pick,take){
+ el.addEventListener('click',pick);
+ el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();pick();}});
+ el.addEventListener('dragover',e=>{e.preventDefault();el.classList.add('on');});
+ el.addEventListener('dragleave',()=>el.classList.remove('on'));
+ el.addEventListener('drop',e=>{e.preventDefault();el.classList.remove('on');take(e);});
+}
+wire($('#dz'),()=>$('#fi').click(),e=>addFiles(e.dataTransfer.files));
+$('#fi').onchange=e=>{addFiles(e.target.files);e.target.value='';};
+let target=-1;
+const pl=$('#pl');
+pl.addEventListener('click',e=>{
+ const g=e.target.closest('[data-pg]');if(g){S.drop.add(S.gs[+g.dataset.pg].key);resetOut();render();return;}
+ const d=e.target.closest('[data-pd]');if(d){delete S.img[S.gs[+d.dataset.pd].key];resetOut();render();return;}
+ const t=e.target.closest('[data-pi]');if(t){target=+t.dataset.pi;$('#pfi').click();}
+});
+pl.addEventListener('keydown',e=>{const t=e.target.closest('[data-pi]');if(t&&(e.key==='Enter'||e.key===' ')){e.preventDefault();target=+t.dataset.pi;$('#pfi').click();}});
+pl.addEventListener('dragover',e=>{const t=e.target.closest('[data-pi]');if(t){e.preventDefault();t.classList.add('on');}});
+pl.addEventListener('dragleave',e=>{const t=e.target.closest('[data-pi]');if(t)t.classList.remove('on');});
+pl.addEventListener('drop',e=>{const t=e.target.closest('[data-pi]');if(t){e.preventDefault();t.classList.remove('on');setImg(+t.dataset.pi,e.dataTransfer.files[0]);}});
+$('#pfi').onchange=e=>{setImg(target,e.target.files[0]);e.target.value='';};
+async function setImg(i,f){
+ if(!f||!f.type.startsWith('image/')||!S.gs[i])return;
+ S.img[S.gs[i].key]=await shrink(f,1400,false);resetOut();render();
+}
+$('#fl').addEventListener('click',e=>{const b=e.target.closest('[data-rm]');if(!b)return;S.files=S.files.filter(f=>f.id!==+b.dataset.rm);resetOut();render();});
+$('#dc').onchange=()=>{resetOut();render();};
+$('#ru').onclick=()=>{S.drop.clear();resetOut();render();};
+
+/* ---- Gambar footer: diupload sekali, disimpan di browser ---- */
+function showFoot(){
+ const t=$('#ft');
+ t.innerHTML=S.foot.url?`<img src="${S.foot.url}" alt="Gambar footer">`:'Gambar footer (opsional)';
+ $('#fd').hidden=!S.foot.url;
+}
+function loadFoot(){
+ try{
+  const j=JSON.parse(localStorage.getItem('rr_foot')||'null');
+  if(j&&j.d){S.foot={bytes:Uint8Array.from(atob(j.d.split(',')[1]),c=>c.charCodeAt(0)),w:j.w,h:j.h,url:j.d};}
+ }catch(e){}
+ showFoot();
+}
+async function setFoot(f){
+ if(!f||!f.type.startsWith('image/'))return;
+ try{
+  const im=await shrink(f,1000,true);
+  let s='';for(let i=0;i<im.bytes.length;i+=8192)s+=String.fromCharCode.apply(null,im.bytes.subarray(i,i+8192));
+  const d='data:image/png;base64,'+btoa(s);
+  S.foot={bytes:im.bytes,w:im.w,h:im.h,url:d};
+  try{localStorage.setItem('rr_foot',JSON.stringify({d,w:im.w,h:im.h}));}catch(e){}
+  resetOut();showFoot();
+ }catch(e){msg('#st','Gambar footer gagal dibaca.',1);}
+}
+wire($('#ft'),()=>$('#ffi').click(),e=>setFoot(e.dataTransfer.files[0]));
+$('#ffi').onchange=e=>{setFoot(e.target.files[0]);e.target.value='';};
+$('#fd').onclick=()=>{S.foot={bytes:null,w:1000,h:200,url:null};try{localStorage.removeItem('rr_foot');}catch(e){}resetOut();showFoot();};
+
+function resetOut(){
+ if(S.url){URL.revokeObjectURL(S.url);S.url=null;}
+ $('#dl').hidden=true;$('#rs').hidden=true;$('#go').hidden=false;
+}
+function prog(n,t){const b=$('#bar');b.hidden=false;b.firstElementChild.style.width=(n*100)+'%';msg('#st',t);}
+const fit=(w,h,bw,bh)=>{const k=Math.min(bw/w,bh/h);return[w*k,h*k];};
+function wrap(font,t,size,max){
+ const out=[];let cur='';
+ for(const w of t.split(' ')){const n=cur?cur+' '+w:w;if(font.widthOfTextAtSize(n,size)>max&&cur){out.push(cur);cur=w;}else cur=n;}
+ if(cur)out.push(cur);return out;
+}
+async function scan(pdf,pi){
+ const p=await pdf.getPage(pi+1),vp=p.getViewport({scale:1}),c=document.createElement('canvas');
+ c.width=Math.ceil(vp.width);c.height=Math.ceil(vp.height);
+ const x=c.getContext('2d',{willReadFrequently:true});x.fillStyle='#fff';x.fillRect(0,0,c.width,c.height);
+ await p.render({canvasContext:x,viewport:vp}).promise;
+ const W=c.width,H=c.height,d=x.getImageData(0,0,W,H).data,ink=v=>d[v]<235||d[v+1]<235||d[v+2]<235;
+ let last=0;
+ out:for(let r=H-1;r>=0;r--)for(let q=4;q<W-4;q++)if(ink((r*W+q)*4)){last=r+1;break out;}
+ return{ink:last,W,H,ink4:ink,d};
+}
+function findSpot(sc,w,h,ax,ay){
+ const{W,H,d}=sc,I=new Uint32Array((W+1)*(H+1));
+ for(let y=0;y<H;y++){let row=0;for(let x=0;x<W;x++){const o=(y*W+x)*4;if(d[o]<235||d[o+1]<235||d[o+2]<235)row++;I[(y+1)*(W+1)+x+1]=I[y*(W+1)+x+1]+row;}}
+ const cnt=(x,y,w,h)=>I[(y+h)*(W+1)+x+w]-I[y*(W+1)+x+w]-I[(y+h)*(W+1)+x]+I[y*(W+1)+x];
+ let best=null;
+ for(let y=4;y+h<=sc.ink;y+=2)for(let x=4;x+w<=W-4;x+=2){
+  const f=cnt(x,y,w,h)/(w*h);if(f>.04)continue;
+  const dist=Math.hypot(x-ax,y-ay)+f*400;if(!best||dist<best.dist)best={x,y,dist};
+ }
+ return best;
+}
+function qtyMark(pg,font,rgb,sc,it,pw,ph){
+ for(const m of it.mark){
+  const cx=((m.vx+m.vw/2)+(m.hx+m.hw/2))/2,cy=(m.vy+m.hy)/2+Math.max(m.vh,6)*.3;
+  pg.drawEllipse({x:cx,y:cy,xScale:Math.max(m.vw,m.hw)/2+8,yScale:Math.abs(m.hy-m.vy)/2+9,borderColor:rgb(0,0,0),borderWidth:1.6});
+ }
+ const txt='Qty : '+it.qty;let sp=null,bw=144,bh=52;const k=pw/595;
+ for(const[w0,h0]of[[144,52],[124,45],[104,38],[86,31],[70,25],[56,20],[44,16]]){const w=Math.round(w0*k),h=Math.round(h0*k);sp=findSpot(sc,w,h,pw*.66,240*k);if(sp){bw=w;bh=h;break;}}
+ const miss=!sp;if(miss){bw=Math.round(70*k);bh=Math.round(25*k);sp={x:pw*.66,y:240*k};}
+ const top=ph-sp.y,bot=top-bh,r=Math.round(bh*.2);
+ pg.drawSvgPath(`M ${r} 0 H ${bw-r} Q ${bw} 0 ${bw} ${r} V ${bh-r} Q ${bw} ${bh} ${bw-r} ${bh} H ${r} Q 0 ${bh} 0 ${bh-r} V ${r} Q 0 0 ${r} 0 Z`,{x:sp.x,y:top,color:rgb(0,0,0)});
+ let size=bh*.62;while(size>5&&font.widthOfTextAtSize(txt,size)>bw-8)size-=.5;
+ pg.drawText(txt,{x:sp.x+(bw-font.widthOfTextAtSize(txt,size))/2,y:bot+(bh-size*.72)/2,size,font,color:rgb(1,1,1)});
+ return miss;
+}
+async function convert(){
+ const packer=$('#pk').value.trim();
+ if(!packer){msg('#st','Isi nama packer dulu.',1);$('#pk').focus();return;}
+ $('#go').disabled=true;S.busy=true;
+ try{
+  const{PDFDocument,StandardFonts,rgb}=PDFLib,{gs}=groups(),total=gs.reduce((a,g)=>a+g.items.length,0);
+  if(!total){msg('#st','Tidak ada resi untuk diproses. Kembalikan kelompok yang dihapus atau upload PDF.',1);$('#go').disabled=false;S.busy=false;return;}
+  prog(0,'Menyiapkan...');
+  const out=await PDFDocument.create(),bold=await out.embedFont(StandardFonts.HelveticaBold),reg=await out.embedFont(StandardFonts.Helvetica);
+  const src=await Promise.all(S.files.map(f=>PDFDocument.load(f.bytes,{ignoreEncryption:true})));
+  const view=await Promise.all(S.files.map(f=>pdfjsLib.getDocument({data:f.bytes.slice()}).promise));
+  let footImg=S.foot.bytes?await out.embedPng(S.foot.bytes):null,done=0,tight=0,nospot=0;
+  const nm=packer.replace(OK,'')||'-';
+  for(const g of gs){
+   const first=src[g.items[0].fi].getPage(g.items[0].pi),{width:W,height:H}=first.getSize();
+   const kp=out.addPage([W,H]),m=Math.max(14,W*.06),sc0=W/595,aw0=W-2*m;
+   const ts=36*sc0,title=g.name.toUpperCase().replace(OK,'');
+   let y=H-m-ts*.85;
+   for(const l of wrap(bold,title,ts,aw0)){kp.drawText(l,{x:m,y,size:ts,font:bold});y-=ts*1.2;}
+   y+=ts*.2;
+   const dl=[`Packer : ${nm}`,`Jumlah Resi : ${g.items.length}`,`Jumlah Paket : ${g.qty}`,'Gambar :'];
+   let ds=34*sc0;while(ds>10&&dl.some(l=>reg.widthOfTextAtSize(l,ds)>aw0))ds-=1;
+   for(const l of dl){y-=ds*1.25;kp.drawText(l,{x:m,y,size:ds,font:reg});}
+   const im=S.img[g.key];
+   if(im){
+    const e=im.png?await out.embedPng(im.bytes):await out.embedJpg(im.bytes);
+    const bw=W-2*m,bh=y-m-6;
+    if(bh>20){const[w,h]=fit(im.w,im.h,bw,bh);kp.drawImage(e,{x:m+(bw-w)/2,y:y-8-h,width:w,height:h});}
+   }
+   for(const it of g.items){
+    const[pg]=await out.copyPages(src[it.fi],[it.pi]);out.addPage(pg);
+    const{width:pw,height:ph}=pg.getSize(),sc=await scan(view[it.fi],it.pi),ink=sc.ink;
+    const pad=6,top=Math.min(ph-pad,ink+pad),bh=Math.max(ph-pad-top,12);
+    if(bh<16)tight++;
+    const by=pad,fs=Math.min(bh*.62,30),fm=14;
+    let size=fs;const maxN=(pw-2*fm)*.4;
+    while(size>6&&bold.widthOfTextAtSize(nm,size)>maxN)size-=.5;
+    const nw=bold.widthOfTextAtSize(nm,size);
+    pg.drawText(nm,{x:fm,y:by+(bh-size*.72)/2,size,font:bold});
+    if(footImg){
+     const bx=fm+nw+12,bw=pw-fm-bx;
+     if(bw>20){
+      const[w,h]=fit(S.foot.w,S.foot.h,bw,bh);
+      pg.drawImage(footImg,{x:bx+(bw-w)/2,y:by+(bh-h)/2,width:w,height:h});
+     }
+    }
+    if(it.mark.length&&qtyMark(pg,bold,rgb,sc,it,pw,ph))nospot++;
+    done++;if(done%5===0||done===total){prog(done/total,`Memproses resi ${done} dari ${total}...`);await new Promise(r=>setTimeout(r));}
+   }
+  }
+  prog(1,'Menyusun file PDF...');
+  const bytes=await out.save(),a=$('#dl');
+  S.url=URL.createObjectURL(new Blob([bytes],{type:'application/pdf'}));
+  a.href=S.url;a.download=`resi-rapi-${new Date().toISOString().slice(0,10)}.pdf`;
+  a.hidden=false;$('#rs').hidden=false;$('#go').hidden=true;
+  msg('#st',`Selesai: ${gs.length} kelompok produk, ${total} resi.`+(tight?` ${tight} resi ruang kosong bawahnya sangat sempit.`:'')+(nospot?` ${nospot} resi tidak punya ruang kosong untuk kotak Qty, cek hasilnya.`:''),!!(tight||nospot));
+  view.forEach(v=>v.destroy());
+ }catch(e){console.error(e);msg('#st','Convert gagal: '+(e.message||e),1);}
+ $('#go').disabled=false;S.busy=false;
+}
+$('#go').onclick=convert;
+$('#rs').onclick=()=>{
+ resetOut();Object.values(S.img).forEach(i=>URL.revokeObjectURL(i.url));
+ S.files=[];S.img={};S.gs=[];S.drop.clear();
+ $('#pk').value='';$('#dc').checked=false;
+ $('#bar').hidden=true;msg('#st','');render();window.scrollTo({top:0});
+};
+loadFoot();
+render();
+if("serviceWorker" in navigator&&location.protocol!=="file:")addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
+</script>
+</body>
+</html>
